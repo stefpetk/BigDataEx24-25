@@ -38,7 +38,7 @@ cr_rdd_2k25 = sc.read.parquet(
     row["AREA NAME"],
     row["Status"])) # crime data for 2020-2025
 
-# Unite the two RDD's as the columns are the same 
+# Create a union of the two RDD's as the columns are the same 
 un_rdd = cr_rdd_2k19.union(cr_rdd_2k25)
 
 def solved_unsolved(row):
@@ -56,7 +56,7 @@ reduced_rdd = mapped_rdd.reduceByKey(lambda a, b: (a[0] + b[0], a[1] + b[1]))
 # Compute solved case rate
 result_rdd = reduced_rdd.map(lambda x: (x[0][0], x[0][1], x[1][0], x[1][1], x[1][0] / x[1][1]))
 
-# Keep only (year, area, solved_rate)
+# Keep only (year, area, solved_rate) tuples
 area_rate_rdd = result_rdd.map(lambda x: (x[0], (x[1], x[4])))
 
 # Group by year
