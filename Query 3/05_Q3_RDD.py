@@ -26,7 +26,7 @@ output_dir = f"hdfs://hdfs-namenode:9000/user/{username}/RddQ3_{job_id}"
 #   Zip Code: t[0]
 #   Estimated Median Household Income: t[1]
 
-# Load the RDD’s for household size and income data
+# Create the RDD’s for household size and income data
 hsize_rdd = sc.read.parquet(
     "hdfs://hdfs-namenode:9000/user/stefanospetkovits/data/parquet/2010_Census_Populations_by_Zip_Code.parquet"
 ).rdd.map(lambda row: (
