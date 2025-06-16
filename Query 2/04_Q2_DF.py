@@ -13,7 +13,7 @@ output_dir = f"hdfs://hdfs-namenode:9000/user/{username}/DfQ2_{job_id}"
 df1 = spark.read.parquet("hdfs://hdfs-namenode:9000/user/stefanospetkovits/data/parquet/LA_Crime_Data_2010_2019.parquet")
 df2 = spark.read.parquet("hdfs://hdfs-namenode:9000/user/stefanospetkovits/data/parquet/LA_Crime_Data_2020_2025.parquet")
 
-# Union the two DataFrames
+# Create a union the two DataFrames
 df = df1.union(df2)
 
 # Extract year and create solved/unsolved columns
