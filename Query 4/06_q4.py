@@ -47,7 +47,7 @@ mo_gun_df = spark.read.text("hdfs://hdfs-namenode:9000/user/root/data/MO_codes.t
     .filter((col("description").contains("gun")) | (col("description").contains("weapon"))) \
     .drop("value","description")
 
-mo_codes_list = mo_gun_df.select("code").rdd.flatMap(lambda x: x).collect()
+mo_codes_list = [row.code for row in mo_gun_df.collect()]
 pattern = r"\b(" + "|".join([code.strip() for code in mo_codes_list if code.strip() != ""]) + r")\b"
 
 # Retain crimes with locations other than Null Island, find crimes with gun MO codes that contain at least 
@@ -64,6 +64,7 @@ crime_with_stations = filtered_crimes_df.crossJoin(stations_df) \
         col("LAT"), col("LON"), col("station_lat"), col("station_lon")
     ))
 
+crime_with_stations.explain(extended=True)
 
 # Using windows, ordering and ranking, keep the closest station for each crime
 window_spec = Window.partitionBy("DR_NO").orderBy(col("distance").asc())
