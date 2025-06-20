@@ -46,6 +46,9 @@ joined_rdd = hsize_rdd.join(income_rdd)
 # income by the average household size
 mean_income_per_person_rdd = joined_rdd.map(lambda x: (x[0], x[1][1] / x[1][0]))
 
+# Sort by zip code (key)
+mean_income_per_person_rdd = mean_income_per_person_rdd.SortByKey()
+
 # Print results (for debugging) and save to HDFS
 for rec in mean_income_per_person_rdd.collect():
     print(rec)
