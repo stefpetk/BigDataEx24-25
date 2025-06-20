@@ -2,3 +2,5 @@
 
 Παρακάτω παρατίθενται τα scripts βάσει των οποίων υλοποιήθηκε το παραπάνω query:
 * a) 05_Q3_RDD.py --> Υλοποίηση query με RDD API.
+* b) 05_q3_df_csv.py --> Υλοποίηση query με DataFrame API και csv αρχεία δεδομένων
+* c) 05_q3_df_parquet.py --> Υλοποίηση query με DataFrame API και parquet αρχεία δεδομένων
