@@ -29,6 +29,7 @@ income_df = spark.read.parquet(
 
 # 1-1
 joined_df = hsize_df.join(income_df, on="zip", how="inner")
+joined_df.explain(extended=True)
 
 result_df = joined_df \
     .filter(col("household_size").isNotNull() & (col("household_size") != 0)) \
